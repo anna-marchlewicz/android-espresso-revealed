@@ -19,11 +19,13 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleMockDebugAndroidTest'
 - task: CopyFiles@2
+  displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     contents: '**/*.apk'
     targetFolder: '$(build.artifactStagingDirectory)'
     flattenFolders: true
 - task: PublishBuildArtifacts@1
+  displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    artifactName: apk
