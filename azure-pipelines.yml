@@ -29,3 +29,8 @@ steps:
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: apk
+- task: Bash@3
+  inputs:
+    displayName: 'Start emulator'
+    targetType: 'filePath'
+    filePath: $(System.DefaultWorkingDirectory).emulator.sh
