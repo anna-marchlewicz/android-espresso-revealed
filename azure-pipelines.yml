@@ -32,6 +32,6 @@ steps:
 - task: Bash@3
   inputs:
     displayName: 'Start emulator'
-    targetType: 'filePath'
+    targetType: 'inline'
     #filePath: '$(Pipeline.Workspace)'
     script: sh ./emulator.sh
