@@ -34,4 +34,4 @@ steps:
     displayName: 'Start emulator'
     targetType: 'filePath'
     filePath: '$(Pipeline.Workspace)'
-    script: ./emulator.sh'
+    script: ./emulator.sh
