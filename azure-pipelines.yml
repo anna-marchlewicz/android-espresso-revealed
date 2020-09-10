@@ -33,5 +33,5 @@ steps:
   inputs:
     displayName: 'Start emulator'
     targetType: 'filePath'
-    filePath: '$(Pipeline.Workspace)'
-    script: ./emulator.sh
+    #filePath: '$(Pipeline.Workspace)'
+    script: sh ./emulator.sh
