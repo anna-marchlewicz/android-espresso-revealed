@@ -33,4 +33,4 @@ steps:
   inputs:
     displayName: 'Start emulator'
     targetType: 'filePath'
-    filePath: $(System.DefaultWorkingDirectory).emulator.sh
+    filePath: '$(Pipeline.Workspace)'/emulator.sh
