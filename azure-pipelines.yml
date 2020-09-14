@@ -33,16 +33,15 @@ steps:
   inputs:
     displayName: 'Start emulator'
     targetType: 'inline'
-    #filePath: '$(Pipeline.Workspace)'
     script: sh ./emulator.sh
 - task: Gradle@2
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
+    publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    tasks: 'connectedMockDebugAndroidTest'
+    tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
 - task: CopyFiles@2
   displayName: 'Copy test results to: $(Build.ArtifactStagingDirectory)'
   inputs:
