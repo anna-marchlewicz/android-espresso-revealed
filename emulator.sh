@@ -17,3 +17,10 @@ $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sy
 $ANDROID_HOME/platform-tools/adb devices
 
 echo "Emulator started"
+
+# Disable animations
+$ANDROID_HOME/platform-tools/adb shell settings put global window_animation_scale 0
+$ANDROID_HOME/platform-tools/adb shell settings put global transition_animation_scale 0
+$ANDROID_HOME/platform-tools/adb shell settings put global animator_duration_scale 0
+
+echo "Animations disabled"
