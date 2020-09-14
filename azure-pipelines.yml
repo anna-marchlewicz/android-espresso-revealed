@@ -44,13 +44,13 @@ steps:
     testResultsFiles: '**/MOCK*.html'
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
 - task: CopyFiles@2
-  displayName: 'Copy test results to: '$(Pipeline.Workspace)'
+  displayName: 'Copy test results to: $(Pipeline.Workspace)'
   inputs:
     contents: '**/MOCK*.html'
     targetFolder: '$(Pipeline.Workspace)'
     flattenFolders: true
 - task: PublishPipelineArtifact@1
-  displayName: 'Archive test resutls to: $(Build.ArtifactStagingDirectory)'
+  displayName: 'Archive test resutls to: $(Pipeline.Workspace)'
   inputs:
     pathToPublish: '$(Pipeline.Workspace)'
     artifactName: test
