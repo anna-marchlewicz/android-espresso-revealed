@@ -39,17 +39,27 @@ steps:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    # publishJUnitResults: true
-    # testResultsFiles: '**/TEST-*.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
-- task: CopyFiles@2
-  displayName: 'Copy test results to: $(Build.ArtifactStagingDirectory)'
+# - task: CopyFiles@2
+#   displayName: 'Copy test results to: $(Build.ArtifactStagingDirectory)'
+#   inputs:
+#     contents: '**/reports/androidTests/connected/flavors/MOCK/**'
+#     targetFolder: '$(Build.ArtifactStagingDirectory)'
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Archive test resutls to: $(Build.ArtifactStagingDirectory)'
+#   inputs:
+#     pathToPublish: '$(Build.ArtifactStagingDirectory)'
+#     artifactName: test
+- task: PublishTestResults@2
   inputs:
-    contents: '**/reports/androidTests/connected/flavors/MOCK/**'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
-    flattenFolders: true
-- task: PublishBuildArtifacts@1
-  displayName: 'Archive test resutls to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: test
+    testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
+    testResultsFiles: '**/TEST-*.xml' 
+    #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+    #mergeTestResults: false # Optional
+    #failTaskOnFailedTests: false # Optional
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    publishRunAttachments: true # Optional
