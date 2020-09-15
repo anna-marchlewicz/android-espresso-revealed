@@ -55,6 +55,6 @@ steps:
   displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    publishLocation: 'FilePath' # Options: container, filePath
-    targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    # publishLocation: 'FilePath' # Options: container, filePath
+    # targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     artifactName: test
