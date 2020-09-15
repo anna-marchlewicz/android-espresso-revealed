@@ -51,3 +51,10 @@ steps:
     archiveType: 'zip' # Options: zip, 7z, tar, wim
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
+- task: PublishBuildArtifacts@1
+  displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    publishLocation: 'FilePath' # Options: container, filePath
+    targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    artifactName: test
