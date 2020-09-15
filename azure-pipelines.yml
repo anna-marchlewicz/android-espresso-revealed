@@ -44,9 +44,10 @@ steps:
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)/app/reports/androidTests/connected/flavors/MOCK/*' 
+    rootFolderOrFile: '$(Build.BinariesDirectory)/app/reports/androidTests/connected/flavors/MOCK' 
     includeRootFolder: true 
-    archiveType: 'zip' # Options: zip, 7z, tar, wim
+    archiveType: '7z' # Options: zip, 7z, tar, wim
+    sevenZipCompression: 'none'
     #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
