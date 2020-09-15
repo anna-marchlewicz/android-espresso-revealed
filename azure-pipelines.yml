@@ -45,7 +45,8 @@ steps:
 - task: ArchiveFiles@2
   condition: always()
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app/reports/androidTests/connected/flavors/MOCK/**' 
+    # rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app/reports/androidTests/connected/flavors/MOCK/' 
+    rootFolderOrFile: '**/reports/androidTests/connected/flavors/MOCK/**'
     includeRootFolder: false 
     archiveType: 'zip' # Options: zip, 7z, tar, wim
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
