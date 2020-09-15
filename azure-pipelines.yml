@@ -42,6 +42,7 @@ steps:
     # publishJUnitResults: true
     # testResultsFiles: '**/TEST-*.xml'
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
+- script: mkdir $(Build.ArtifactStagingDirectory)/testResults
 - task: ArchiveFiles@2
   condition: always()
   inputs:
@@ -52,9 +53,7 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
 - task: PublishBuildArtifacts@1
-  displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
+  displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    # publishLocation: 'FilePath' # Options: container, filePath
-    # targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     artifactName: test
