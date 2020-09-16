@@ -39,23 +39,22 @@ steps:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    # publishJUnitResults: true
-    # testResultsFiles: '**/TEST-*.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
-# - script: mkdir $(Build.ArtifactStagingDirectory)/testResults
-  # condition: always()
+- script: mkdir $(Build.ArtifactStagingDirectory)/testResults
+  condition: always()
+- script: echo $(Build.Repository.LocalPath)
 - task: ArchiveFiles@2
   condition: always()
-  inputs:
-    # rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app/reports/androidTests/connected/flavors/MOCK/' 
+  inputs: 
     rootFolderOrFile: '/Users/runner/work/1/s/app/build/reports/androidTests/connected/flavors/MOCK/'
     includeRootFolder: false 
     archiveType: 'zip' # Options: zip, 7z, tar, wim
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
 - task: PublishBuildArtifacts@1
   displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    patterns: '**/*.zip'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
     artifactName: test
