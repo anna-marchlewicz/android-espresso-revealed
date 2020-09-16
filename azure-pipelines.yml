@@ -48,16 +48,16 @@ stages:
 - stage: Stage3
   displayName: Run tests
   jobs:
-  - job: ArchiveResults
+  - job: RunTests
     steps:
     - task: Gradle@2
-        inputs:
-          workingDirectory: ''
-          gradleWrapperFile: 'gradlew'
-          gradleOptions: '-Xmx3072m'
-          publishJUnitResults: true
-          testResultsFiles: '**/TEST-*.xml'
-          tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
+      inputs:
+        workingDirectory: ''
+        gradleWrapperFile: 'gradlew'
+        gradleOptions: '-Xmx3072m'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
       - script: mkdir $(Build.ArtifactStagingDirectory)/testResults
         condition: always()      
       - task: ArchiveFiles@2
