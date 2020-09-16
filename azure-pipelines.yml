@@ -42,8 +42,8 @@ steps:
     # publishJUnitResults: true
     # testResultsFiles: '**/TEST-*.xml'
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
-- script: mkdir $(Build.ArtifactStagingDirectory)/testResults
-  condition: always()
+# - script: mkdir $(Build.ArtifactStagingDirectory)/testResults
+  # condition: always()
 - task: ArchiveFiles@2
   condition: always()
   inputs:
@@ -51,11 +51,11 @@ steps:
     rootFolderOrFile: '/Users/runner/work/1/s/app/build/reports/androidTests/connected/flavors/MOCK/'
     includeRootFolder: false 
     archiveType: 'zip' # Options: zip, 7z, tar, wim
-    archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
 - task: PublishBuildArtifacts@1
   displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
     patterns: '**/*.zip'
     artifactName: test
