@@ -57,4 +57,5 @@ steps:
   displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
+    patterns: '**/*.zip'
     artifactName: test
