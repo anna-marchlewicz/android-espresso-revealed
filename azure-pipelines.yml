@@ -43,6 +43,7 @@ steps:
     # testResultsFiles: '**/TEST-*.xml'
     tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
 - script: mkdir $(Build.ArtifactStagingDirectory)/testResults
+  condition: always()
 - task: ArchiveFiles@2
   condition: always()
   inputs:
@@ -55,5 +56,5 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
     artifactName: test
