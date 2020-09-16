@@ -51,7 +51,7 @@ steps:
     rootFolderOrFile: '/Users/runner/work/1/s/app/build/reports/androidTests/connected/flavors/MOCK/'
     includeRootFolder: false 
     archiveType: 'zip' # Options: zip, 7z, tar, wim
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
 - task: PublishBuildArtifacts@1
   displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
