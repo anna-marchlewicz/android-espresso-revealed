@@ -9,52 +9,67 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
-steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleMockDebugAndroidTest'
-- task: CopyFiles@2
-  displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
-    flattenFolders: true
-- task: PublishBuildArtifacts@1
-  displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: apk
-- task: Bash@3
-  inputs:
-    displayName: 'Start emulator'
-    targetType: 'inline'
-    script: sh ./emulator.sh
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
-- script: mkdir $(Build.ArtifactStagingDirectory)/testResults
+stages:
+- stage: Stage1
+  displayName: Build app
+  jobs:
+  - job: BuildApp
+    displayName: Build app with Gradle
+    steps:
+    - task: Gradle@2
+      inputs:
+        workingDirectory: ''
+        gradleWrapperFile: 'gradlew'
+        gradleOptions: '-Xmx3072m'
+        publishJUnitResults: false
+        testResultsFiles: '**/TEST-*.xml'
+        tasks: 'assembleMockDebugAndroidTest'
+    - task: CopyFiles@2
+      displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        contents: '**/*.apk'
+        targetFolder: '$(build.artifactStagingDirectory)'
+        flattenFolders: true
+    - task: PublishBuildArtifacts@1
+      displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: apk
+- stage: Stage2
+  displayName: Start emulator
+  jobs:
+  - job: StartEmulator
+    steps:
+      - task: Bash@3
+        inputs:
+          displayName: 'Start emulator'
+          targetType: 'inline'
+          script: sh ./emulator.sh
+      - task: Gradle@2
+        inputs:
+          workingDirectory: ''
+          gradleWrapperFile: 'gradlew'
+          gradleOptions: '-Xmx3072m'
+          publishJUnitResults: true
+          testResultsFiles: '**/TEST-*.xml'
+          tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
+- stage: Stage3
+  displayName: Archive results
   condition: always()
-- script: echo $(Build.Repository.LocalPath)
-- task: ArchiveFiles@2
-  condition: always()
-  inputs: 
-    rootFolderOrFile: '$(Build.Repository.LocalPath)/app/build/reports/androidTests/connected/flavors/MOCK/'
-    includeRootFolder: false 
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
-    replaceExistingArchive: true 
-- task: PublishBuildArtifacts@1
-  displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
-    artifactName: test
+  jobs:
+  - job: ArchiveResults
+    steps:
+      - script: mkdir $(Build.ArtifactStagingDirectory)/testResults      
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: '$(Build.Repository.LocalPath)/app/build/reports/androidTests/connected/flavors/MOCK/'
+          includeRootFolder: false 
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
+          replaceExistingArchive: true 
+      - task: PublishBuildArtifacts@1
+          displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
+          inputs:
+          pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
+          artifactName: test
+
