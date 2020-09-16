@@ -45,7 +45,12 @@ stages:
           displayName: 'Start emulator'
           targetType: 'inline'
           script: sh ./emulator.sh
-      - task: Gradle@2
+- stage: Stage3
+  displayName: Run tests
+  jobs:
+  - job: ArchiveResults
+    steps:
+    - task: Gradle@2
         inputs:
           workingDirectory: ''
           gradleWrapperFile: 'gradlew'
@@ -53,14 +58,10 @@ stages:
           publishJUnitResults: true
           testResultsFiles: '**/TEST-*.xml'
           tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
-- stage: Stage3
-  displayName: Archive results
-  condition: always()
-  jobs:
-  - job: ArchiveResults
-    steps:
-      - script: mkdir $(Build.ArtifactStagingDirectory)/testResults      
+      - script: mkdir $(Build.ArtifactStagingDirectory)/testResults
+        condition: always()      
       - task: ArchiveFiles@2
+        condition: always()
         inputs:
           rootFolderOrFile: '$(Build.Repository.LocalPath)/app/build/reports/androidTests/connected/flavors/MOCK/'
           includeRootFolder: false 
