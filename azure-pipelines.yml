@@ -48,9 +48,9 @@ steps:
 - task: ArchiveFiles@2
   condition: always()
   inputs: 
-    rootFolderOrFile: '/Users/runner/work/1/s/app/build/reports/androidTests/connected/flavors/MOCK/'
+    rootFolderOrFile: '$(Build.Repository.LocalPath)/app/build/reports/androidTests/connected/flavors/MOCK/'
     includeRootFolder: false 
-    archiveType: 'zip' # Options: zip, 7z, tar, wim
+    archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
     replaceExistingArchive: true 
 - task: PublishBuildArtifacts@1
