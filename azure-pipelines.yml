@@ -62,6 +62,7 @@ stages:
           archiveType: 'zip'
           archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
       - task: PublishBuildArtifacts@1
+        condition: always()
         displayName: 'Archive test results .zip to: $(Build.ArtifactStagingDirectory)'
         inputs:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/testResults'
