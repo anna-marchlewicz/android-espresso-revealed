@@ -38,17 +38,14 @@ stages:
 - stage: Stage2
   displayName: Run Tests
   jobs:
-  - job: StartEmulator
-    displayName: Run emulator
+  - job: RunTests
+    displayName: Run tests on emulator
     steps:
       - task: Bash@3
         inputs:
           displayName: 'Start emulator'
           targetType: 'inline'
           script: sh ./emulator.sh
-  - job: RunTests
-    displayName: Run tests
-    steps: 
       - task: Gradle@2
         inputs:
           workingDirectory: ''
