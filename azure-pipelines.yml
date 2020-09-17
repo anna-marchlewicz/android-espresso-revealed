@@ -53,3 +53,10 @@ stages:
           publishJUnitResults: true
           testResultsFiles: '**/TEST-*.xml'
           tasks: '-Pandroid.testInstrumentationRunnerArguments.class=com.example.android.architecture.blueprints.todoapp.test.chapter11.tests.AddToDoTest connectedMockDebugAndroidTest'
+      - task: ArchiveFiles@2
+        condition: always()
+        inputs: 
+          rootFolderOrFile: '$(Build.Repository.LocalPath)/app/build/reports/androidTests/connected/flavors/MOCK/'
+          includeRootFolder: false 
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/testResults/$(Build.BuildId).zip' 
