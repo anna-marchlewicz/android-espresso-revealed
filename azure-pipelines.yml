@@ -24,6 +24,18 @@ stages:
         publishJUnitResults: false
         testResultsFiles: '**/TEST-*.xml'
         tasks: 'assembleMockDebugAndroidTest'
+    - task: AndroidSigning@3
+      inputs:
+        apkFiles: '**/*.apk' 
+        apksign: true
+        apksignerKeystoreFile: file.keystore
+        apksignerKeystorePassword: Test1234
+        apksignerKeystoreAlias: Test1234
+        #apksignerKeyPassword: # Optional
+        #apksignerArguments: '--verbose' # Optional
+        #apksignerFile: # Optional
+        #zipalign: true # Optional
+        #zipalignFile: # Optional
     - task: CopyFiles@2
       displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
       inputs:
