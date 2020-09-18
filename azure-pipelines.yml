@@ -29,8 +29,8 @@ stages:
         apkFiles: '**/*.apk' 
         apksign: true
         apksignerKeystoreFile: file.keystore
-        apksignerKeystorePassword: Test1234
-        apksignerKeystoreAlias: Test1234
+        apksignerKeystorePassword: 'Test1234'
+        apksignerKeystoreAlias: 'Test1234'
         #apksignerKeyPassword: # Optional
         #apksignerArguments: '--verbose' # Optional
         #apksignerFile: # Optional
