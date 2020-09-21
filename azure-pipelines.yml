@@ -42,6 +42,12 @@ stages:
         contents: '**/*.apk'
         targetFolder: '$(build.artifactStagingDirectory)'
         flattenFolders: true
+    - task: CopyFiles@2
+      displayName: 'Copy manifest files to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        contents: '**/manifest.json'
+        targetFolder: '$(build.artifactStagingDirectory)'
+        flattenFolders: true
     - task: PublishBuildArtifacts@1
       displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
       inputs:
