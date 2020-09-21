@@ -34,7 +34,7 @@ stages:
         apksignerKeyPassword: 'Test1234'
         #apksignerArguments: '--verbose' # Optional
         #apksignerFile: # Optional
-        zipalign: true # Optional
+        zipalign: false # Optional
         #zipalignFile: # Optional
     - task: CopyFiles@2
       displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
