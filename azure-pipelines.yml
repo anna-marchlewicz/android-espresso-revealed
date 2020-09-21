@@ -37,6 +37,7 @@ stages:
         zipalign: false # Optional
         #zipalignFile: # Optional
     - task: CopyFiles@2
+      condition: always()
       displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
       inputs:
         contents: '**/*.apk'
@@ -69,11 +70,11 @@ stages:
       condition: always()
       displayName: 'Copy manifest files to: $(Build.ArtifactStagingDirectory)'
       inputs:
-        contents: '**/manifest.json'
+        contents: '/Users/runner/work/1/a/AppCenterTest/manifest.json'
         targetFolder: '$(build.artifactStagingDirectory)'
-        flattenFolders: true
     - task: PublishBuildArtifacts@1
-      displayName: 'Archive .apk files to: $(Build.ArtifactStagingDirectory)'
+      condition: always()
+      displayName: 'Archive files to: $(Build.ArtifactStagingDirectory)'
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: apk
