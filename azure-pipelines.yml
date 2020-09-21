@@ -55,10 +55,10 @@ stages:
     #     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     #     artifactName: apk
     - task: AppCenterDistribute@3
-        inputs:
-          serverEndpoint: 'MyService'
-          appSlug: 'amarchlewicz-pgs/TODO' 
-          appFile: '$(Build.ArtifactStagingDirectory)/app-mock-debug.apk'
+      inputs:
+        serverEndpoint: 'MyService'
+        appSlug: 'amarchlewicz-pgs/TODO' 
+        appFile: '$(Build.ArtifactStagingDirectory)/app-mock-debug.apk'
     - task: AppCenterTest@1
       inputs:
         appFile: '$(Build.ArtifactStagingDirectory)/app-mock-debug.apk'
