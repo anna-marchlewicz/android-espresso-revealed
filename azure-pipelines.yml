@@ -38,11 +38,11 @@ stages:
         #zipalignFile: # Optional
     - task: AppCenterTest@1
       inputs:
-        appFile: '$(Build.ArtifactStagingDirectory)/apk/app-mock-debug.apk'
+        appFile: '$(Build.Repository.LocalPath)/apk/app-mock-debug.apk'
         artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
         frameworkOption: 'espresso'
         espressoBuildDirectory: '$(Build.ArtifactStagingDirectory)'
-        espressoTestApkFile: '$(Build.ArtifactStagingDirectory)/apk/app-mock-debug-androidTest.apk'
+        espressoTestApkFile: '$(Build.Repository.LocalPath)/apk/app-mock-debug-androidTest.apk'
         credentialsOption: 'inputs'
         username: 'amarchlewicz-pgs'
         password: 'K_nwpb22tjS'
