@@ -50,9 +50,9 @@ stages:
     - task: AppCenterTest@1
       inputs:
         appFile: '$(Build.ArtifactStagingDirectory)/app-mock-debug.apk'
-        # artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
+        artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
         frameworkOption: 'espresso'
-        espressoBuildDirectory: '$(Build.ArtifactStagingDirectory)'
+        # espressoBuildDirectory: '$(Build.ArtifactStagingDirectory)'
         espressoTestApkFile: '$(Build.ArtifactStagingDirectory)/app-mock-debug-androidTest.apk'
         credentialsOption: 'inputs'
         username: 'amarchlewicz-pgs'
