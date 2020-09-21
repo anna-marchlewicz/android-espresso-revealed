@@ -30,11 +30,11 @@ stages:
         apksign: true
         apksignerKeystoreFile: debug.jks
         apksignerKeystorePassword: 'Test1234'
-        apksignerKeystoreAlias: 'Test1234'
-        #apksignerKeyPassword: # Optional
+        apksignerKeystoreAlias: 'debug_mock'
+        apksignerKeyPassword: 'Test1234'
         #apksignerArguments: '--verbose' # Optional
         #apksignerFile: # Optional
-        #zipalign: true # Optional
+        zipalign: true # Optional
         #zipalignFile: # Optional
     - task: CopyFiles@2
       displayName: 'Copy .apk files to: $(Build.ArtifactStagingDirectory)'
