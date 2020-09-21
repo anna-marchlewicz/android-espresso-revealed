@@ -28,7 +28,7 @@ stages:
       inputs:
         apkFiles: '**/*.apk' 
         apksign: true
-        apksignerKeystoreFile: file.keystore
+        apksignerKeystoreFile: debug.jks
         apksignerKeystorePassword: 'Test1234'
         apksignerKeystoreAlias: 'Test1234'
         #apksignerKeyPassword: # Optional
