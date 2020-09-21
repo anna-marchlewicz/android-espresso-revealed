@@ -66,6 +66,7 @@ stages:
         devices: 'Motorola'
         localeOption: 'en_US'
     - task: CopyFiles@2
+      condition: always()
       displayName: 'Copy manifest files to: $(Build.ArtifactStagingDirectory)'
       inputs:
         contents: '**/manifest.json'
