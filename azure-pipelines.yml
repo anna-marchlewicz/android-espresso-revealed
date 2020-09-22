@@ -64,7 +64,7 @@ stages:
         credentialsOption: 'serviceEndpoint'
         serverEndpoint: 'MyService'
         appSlug: 'amarchlewicz-pgs/TODO'
-        devices: 'Motorola'
+        devices: 'amarchlewicz-pgs/motorola'
         localeOption: 'en_US'
         series: 'master'
         showDebugOutput: true
