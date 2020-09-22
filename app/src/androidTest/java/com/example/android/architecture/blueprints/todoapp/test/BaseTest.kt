@@ -11,9 +11,12 @@ import com.example.android.architecture.blueprints.todoapp.test.chapter2.customf
 import com.example.android.architecture.blueprints.todoapp.test.chapter2.screenshotwatcher.ScreenshotWatcher
 import org.junit.Before
 import org.junit.Rule
+import org.junit.After
 import org.junit.rules.RuleChain
 import org.junit.rules.TestName
 import org.junit.runner.RunWith
+import com.microsoft.appcenter.espresso.Factory
+import com.microsoft.appcenter.espresso.ReportHelper
 
 @RunWith(AndroidJUnit4::class)
 open class BaseTest {
@@ -37,6 +40,12 @@ open class BaseTest {
     var screenshotWatcher = ScreenshotWatcher()
 
     /**
+     * Instantiate the ReportHelper for AppCenter
+     */
+    @get:Rule
+    var reportHelper = Factory.getReportHelper()
+
+    /**
      * The chain of rules where outerRule is the starting point.
      * Allows having dependencies between rules.
      */
@@ -54,5 +63,10 @@ open class BaseTest {
     open fun setUp() {
         setFailureHandler(CustomFailureHandler(
                 InstrumentationRegistry.getInstrumentation().targetContext))
+    }
+
+    @After
+    open fun tearDown() {
+        reportHelper.label("Stopping App")
     }
 }

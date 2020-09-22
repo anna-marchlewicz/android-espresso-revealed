@@ -108,6 +108,7 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-web:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-accessibility:$rootProject.espressoVersion"
+    androidTestImplementation('com.microsoft.appcenter:espresso-test-extension:1.4')
 
     // Accessibility and UI Automator dependencies
     androidTestImplementation "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:$rootProject.accessibilityFramework"
