@@ -66,7 +66,7 @@ stages:
         appSlug: 'amarchlewicz-pgs/TODO'
         devices: 'amarchlewicz-pgs/motorola'
         localeOption: 'en_US'
-        series: 'master'
+        series: 'alpha'
         showDebugOutput: true
     - task: CopyFiles@2
       condition: always()

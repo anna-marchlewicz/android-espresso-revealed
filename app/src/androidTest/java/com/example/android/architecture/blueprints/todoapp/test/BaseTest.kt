@@ -43,7 +43,7 @@ open class BaseTest {
      * Instantiate the ReportHelper for AppCenter
      */
     @get:Rule
-    var reportHelper = Factory.getReportHelper()
+    var reportHelper: ReportHelper = Factory.getReportHelper()
 
     /**
      * The chain of rules where outerRule is the starting point.
