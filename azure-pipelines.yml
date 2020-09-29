@@ -23,6 +23,14 @@ stages:
         gradleOptions: '-Xmx3072m'
         publishJUnitResults: false
         testResultsFiles: '**/TEST-*.xml'
+        tasks: 'assembleMockDebug'
+    - task: Gradle@2
+      inputs:
+        workingDirectory: ''
+        gradleWrapperFile: 'gradlew'
+        gradleOptions: '-Xmx3072m'
+        publishJUnitResults: false
+        testResultsFiles: '**/TEST-*.xml'
         tasks: 'assembleMockDebugAndroidTest'
     - task: AndroidSigning@3
       inputs:
@@ -63,10 +71,10 @@ stages:
         espressoTestApkFile: '$(Build.ArtifactStagingDirectory)/app-mock-debug-androidTest.apk'
         credentialsOption: 'serviceEndpoint'
         serverEndpoint: 'MyService'
-        appSlug: 'amarchlewicz-pgs/TODO'
+        appSlug: 'amarchlewicz-pgs/todo'
         devices: 'amarchlewicz-pgs/motorola'
         localeOption: 'en_US'
-        series: 'alpha'
+        series: 'master'
         showDebugOutput: true
     - task: CopyFiles@2
       condition: always()
